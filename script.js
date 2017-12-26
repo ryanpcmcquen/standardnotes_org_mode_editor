@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    const modes = [
-        "orgmode"
-    ];
 
     let componentManagerInstance;
     let workingNote;
@@ -11,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let editor;
     let modeInput;
     let select;
-    let defaultMode = "orgmode";
     let ignoreTextChange = false;
     let initialLoad = true;
 
@@ -106,13 +102,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
             indentUnit: 4,
             keyMap: "emacs",
-            lineNumbers: true
+            lineNumbers: true,
+            mode: "orgmode"
         });
         editor.setSize("100%", "100%");
-
-        setTimeout(function() {
-            changeMode(defaultMode);
-        }, 1);
 
         editor.on("change", function() {
             if (ignoreTextChange) {
@@ -124,9 +117,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     loadEditor();
     loadComponentManager();
-
-    window.setKeyMap = (keymap) => {
-        editor.setOption("keyMap", keymap);
-    };
 
 });
