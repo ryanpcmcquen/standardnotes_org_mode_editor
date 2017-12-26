@@ -34,13 +34,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         if (mode) {
             editor.setOption("mode", spec);
-            //CodeMirror.autoLoadMode(editor, mode);
+            CodeMirror.autoLoadMode(editor, mode);
             
             if (clientData) {
                 clientData.mode = mode;
             }
         } else {
-            console.error("Could not find a mode corresponding to " + val);
+            console.error(`Could not find a mode corresponding to: ${val}`);
         }
     };
 
@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const loadComponentManager = () => {
         let permissions = [{ name: "stream-context-item" }];
         componentManagerInstance = new ComponentManager(permissions, function() {
-            // on ready
         });
 
         componentManagerInstance.streamContextItem(note => {
