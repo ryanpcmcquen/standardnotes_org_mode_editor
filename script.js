@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     };
 
     const loadEditor = () => {
-        editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
             lineNumbers: true
         });
         editor.setSize("100%", "100%");
