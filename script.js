@@ -104,8 +104,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     const loadEditor = () => {
         editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
-            lineNumbers: true,
-            indentUnit: 4
+            indentUnit: 4,
+            keyMap: "emacs",
+            lineNumbers: true
         });
         editor.setSize("100%", "100%");
 
