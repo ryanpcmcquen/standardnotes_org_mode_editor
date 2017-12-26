@@ -23,16 +23,3 @@ html {
     padding: 0;
     background-color: transparent;
 }
-#select-wrapper {
-    width: 100%;
-    margin: 0;
-    padding-left: 16px;
-    background-color: rgb(247, 247, 247);
-    border-top: 1px solid rgb(221, 221, 221);
-}
-#language-label {
-    font-size: 12px;
-}
-#select {
-    margin: 5px;
-}
