@@ -1,132 +1,32 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    var modes = [
+    const modes = [
         "org"
     ];
 
-    var componentManager;
-    var workingNote, clientData;
-    var lastValue, lastUUID;
-    var editor, modeInput, select;
-    var defaultMode = "javascript";
-    var ignoreTextChange = false;
-    var initialLoad = true;
+    let workingNote;
+    let clientData;
+    let lastValue;
+    let lastUUID;
+    let editor;
+    let modeInput;
+    let select;
+    let defaultMode = "org";
+    let ignoreTextChange = false;
+    let initialLoad = true;
 
-    function loadComponentManager() {
-        var permissions = [{ name: "stream-context-item" }];
-        componentManager = new ComponentManager(permissions, function() {
-            // on ready
-        });
-
-        componentManager.streamContextItem(note => {
-            onReceivedNote(note);
-        });
-    }
-
-    function save() {
-        if (workingNote) {
-            lastValue = editor.getValue();
-            workingNote.content.text = lastValue;
-            workingNote.clientData = clientData;
-            componentManager.saveItem(workingNote);
-        }
-    }
-
-    function onReceivedNote(note) {
-        if (note.uuid !== lastUUID) {
-            // Note changed, reset last values
-            lastValue = null;
-            initialLoad = true;
-            lastUUID = note.uuid;
-        }
-
-        workingNote = note;
-        // Only update UI on non-metadata updates.
-        if (note.isMetadataUpdate) {
-            return;
-        }
-        clientData = note.clientData;
-
-        var mode = clientData.mode;
-        if (mode) {
-            changeMode(mode);
-        }
-
-        if (editor) {
-            if (note.content.text !== lastValue) {
-                ignoreTextChange = true;
-                editor.getDoc().setValue(workingNote.content.text);
-                ignoreTextChange = false;
-            }
-
-            if (initialLoad) {
-                initialLoad = false;
-                editor.getDoc().clearHistory();
-            }
-        }
-    }
-
-    function loadEditor() {
-        editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-            lineNumbers: true
-        });
-        editor.setSize("100%", "100%");
-
-        setTimeout(function() {
-            changeMode(defaultMode);
-        }, 1);
-
-        createSelectElements();
-
-        editor.on("change", function() {
-            if (ignoreTextChange) {
-                return;
-            }
-            save();
-        });
-    }
-
-    function createSelectElements() {
-        select = document.getElementById("select");
-        var index = 0;
-        for (var element in modes) {
-            var opt = document.createElement("option");
-            opt.value = index;
-            opt.innerHTML = modes[index];
-            select.appendChild(opt);
-            index++;
-        }
-    }
-
-    loadEditor();
-    loadComponentManager();
-
-    /*
-    Editor Modes
-  */
-
-    window.setKeyMap = function(keymap) {
-        editor.setOption("keyMap", keymap);
-    };
-
-    window.onLanguageSelect = function(event) {
-        var language = modes[select.selectedIndex];
-        changeMode(language);
-        save();
-    };
-
-    function changeMode(inputMode) {
-        var val = inputMode,
-            m,
-            mode,
-            spec;
+    const changeMode = (inputMode) => {
+        let val = inputMode;
+        let m;
+        let mode;
+        let spec;
         if ((m = /.+\.([^.]+)$/.exec(val))) {
-            var info = CodeMirror.findModeByExtension(m[1]);
+            let info = CodeMirror.findModeByExtension(m[1]);
             if (info) {
                 mode = info.mode;
                 spec = info.mime;
             }
         } else if (/\//.test(val)) {
-            var info = CodeMirror.findModeByMIME(val);
+            let info = CodeMirror.findModeByMIME(val);
             if (info) {
                 mode = info.mode;
                 spec = val;
@@ -147,5 +47,120 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } else {
             console.error("Could not find a mode corresponding to " + val);
         }
-    }
+    };
+
+    const onReceivedNote = (note) => {
+        if (note.uuid !== lastUUID) {
+            // Note changed, reset last values
+            lastValue = null;
+            initialLoad = true;
+            lastUUID = note.uuid;
+        }
+
+        workingNote = note;
+        // Only update UI on non-metadata updates.
+        if (note.isMetadataUpdate) {
+            return;
+        }
+        clientData = note.clientData;
+
+        let mode = clientData.mode;
+        if (mode) {
+            changeMode(mode);
+        }
+
+        if (editor) {
+            if (note.content.text !== lastValue) {
+                ignoreTextChange = true;
+                editor.getDoc().setValue(workingNote.content.text);
+                ignoreTextChange = false;
+            }
+
+            if (initialLoad) {
+                initialLoad = false;
+                editor.getDoc().clearHistory();
+            }
+        }
+    };
+
+    const loadComponentManager = () => {
+        let permissions = [{ name: "stream-context-item" }];
+        componentManager = new ComponentManager(permissions, function() {
+            // on ready
+        });
+
+        componentManager.streamContextItem(note => {
+            onReceivedNote(note);
+        });
+    };
+
+    const save = () => {
+        if (workingNote) {
+            lastValue = editor.getValue();
+            workingNote.content.text = lastValue;
+            workingNote.clientData = clientData;
+            componentManager.saveItem(workingNote);
+        }
+    };
+
+    const createSelectElements = () => {
+        select = document.getElementById("select");
+        let index = 0;
+        /*
+        for (let element in modes) {
+            let opt = document.createElement("option");
+            opt.value = index;
+            opt.innerHTML = modes[index];
+            select.appendChild(opt);
+            index++;
+        }
+        */
+        // Test this:
+        Object.keys(modes).forEach((element) => {
+            let opt = document.createElement("option");
+            opt.value = index;
+            opt.innerHTML = modes[index];
+            select.appendChild(opt);
+            index++;
+        };
+    };
+
+    const loadEditor = () => {
+        editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true
+        });
+        editor.setSize("100%", "100%");
+
+        setTimeout(function() {
+            changeMode(defaultMode);
+        }, 1);
+
+        createSelectElements();
+
+        editor.on("change", function() {
+            if (ignoreTextChange) {
+                return;
+            }
+            save();
+        });
+    };
+
+    loadEditor();
+    loadComponentManager();
+
+    /*
+    Editor Modes
+  */
+
+    window.setKeyMap = (keymap) => {
+        editor.setOption("keyMap", keymap);
+    };
+
+    window.onLanguageSelect = (event) => {
+        let language = modes[select.selectedIndex];
+        changeMode(language);
+        save();
+    };
+
+
 });
