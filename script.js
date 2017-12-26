@@ -124,10 +124,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     loadEditor();
     loadComponentManager();
 
-    /*
-    Editor Modes
-  */
-
     window.setKeyMap = (keymap) => {
         editor.setOption("keyMap", keymap);
     };
