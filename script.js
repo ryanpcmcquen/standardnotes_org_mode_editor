@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         "org"
     ];
 
+    let ComponentManager;
     let workingNote;
     let clientData;
     let lastValue;
