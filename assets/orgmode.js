@@ -1,4 +1,4 @@
-import "codemirror/addon/mode/simple";
+// import "codemirror/addon/mode/simple";
 
 CodeMirror.__mode = "orgmode";
 
@@ -199,4 +199,4 @@ CodeMirror.afterInit = function(editor) {
     }
 };
 
-export default CodeMirror;
+// export default CodeMirror;
