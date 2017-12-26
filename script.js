@@ -37,13 +37,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         if (mode) {
             editor.setOption("mode", spec);
-            CodeMirror.autoLoadMode(editor, mode);
+            //CodeMirror.autoLoadMode(editor, mode);
+            
             if (clientData) {
                 clientData.mode = mode;
             }
-            document.getElementById("select").selectedIndex = modes.indexOf(
-                mode
-            );
         } else {
             console.error("Could not find a mode corresponding to " + val);
         }
@@ -103,39 +101,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     };
 
-    const createSelectElements = () => {
-        select = document.getElementById("select");
-        let index = 0;
-        /*
-        for (let element in modes) {
-            let opt = document.createElement("option");
-            opt.value = index;
-            opt.innerHTML = modes[index];
-            select.appendChild(opt);
-            index++;
-        }
-        */
-        // Test this:
-        Object.keys(modes).forEach((element) => {
-            let opt = document.createElement("option");
-            opt.value = index;
-            opt.innerHTML = modes[index];
-            select.appendChild(opt);
-            index++;
-        });
-    };
-
     const loadEditor = () => {
         editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
-            lineNumbers: true
+            lineNumbers: true,
+            indentUnit: 4
         });
         editor.setSize("100%", "100%");
 
         setTimeout(function() {
             changeMode(defaultMode);
         }, 1);
-
-        createSelectElements();
 
         editor.on("change", function() {
             if (ignoreTextChange) {
@@ -155,12 +130,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
     window.setKeyMap = (keymap) => {
         editor.setOption("keyMap", keymap);
     };
-
-    window.onLanguageSelect = (event) => {
-        let language = modes[select.selectedIndex];
-        changeMode(language);
-        save();
-    };
-
 
 });
