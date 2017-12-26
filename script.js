@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     const loadEditor = () => {
         editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
+            autofocus: true,
             indentUnit: 4,
             keyMap: "emacs",
             lineNumbers: true,
