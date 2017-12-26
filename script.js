@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     const modes = [
-        "org"
+        "orgmode"
     ];
 
     let componentManagerInstance;
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let editor;
     let modeInput;
     let select;
-    let defaultMode = "org";
+    let defaultMode = "orgmode";
     let ignoreTextChange = false;
     let initialLoad = true;
 
