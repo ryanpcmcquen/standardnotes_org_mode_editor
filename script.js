@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             opt.innerHTML = modes[index];
             select.appendChild(opt);
             index++;
-        };
+        });
     };
 
     const loadEditor = () => {
