@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         "org"
     ];
 
-    let ComponentManager;
+    let componentManagerInstance;
     let workingNote;
     let clientData;
     let lastValue;
@@ -84,11 +84,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     const loadComponentManager = () => {
         let permissions = [{ name: "stream-context-item" }];
-        componentManager = new ComponentManager(permissions, function() {
+        componentManagerInstance = new ComponentManager(permissions, function() {
             // on ready
         });
 
-        componentManager.streamContextItem(note => {
+        componentManagerInstance.streamContextItem(note => {
             onReceivedNote(note);
         });
     };
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             lastValue = editor.getValue();
             workingNote.content.text = lastValue;
             workingNote.clientData = clientData;
-            componentManager.saveItem(workingNote);
+            componentManagerInstance.saveItem(workingNote);
         }
     };
 
