@@ -5,10 +5,20 @@
     <base target="_blank">
     <meta charset="UTF-8">
 
+    <!--
     <script src="assets/CodeMirror/codemirror.js"></script>
     <script src="assets/CodeMirror/keymap/emacs.js"></script>
     <script src="assets/CodeMirror/mode/loadmode.js"></script>
     <script src="assets/CodeMirror/mode/simple.js"></script>
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/lib/codemirror.js" integrity="sha256-ltQ93UdtJpfYPuUr/NK19jEvdA0gXj0LjshcsnYDxvQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/keymap/emacs.js" integrity="sha256-RK32vyGAnVf5XvieY7f/FXmYWG1oGRpxNiQOxrGnyI4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/addon/mode/loadmode.js" integrity="sha256-CR+I0kA8gpqBcrmz7x2xZseaba9NF8k8oeZ4cpW5Rq8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/addon/mode/simple.js" integrity="sha256-mEan6clyeMFs0QPEN+31PA3qYatMVyG2uWyiPYyiRdU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/addon/fold/foldcode.js" integrity="sha256-OACGugamoK8QlA6UXmMIOML5y7zlc74JBEfOKUsyfws=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@latest/addon/fold/foldgutter.js" integrity="sha256-FOr7dqBJfuZIdp3ACdmg88poq2ZABUiQ9ChPgPSxGas=" crossorigin="anonymous"></script>
+    
     <script src="assets/orgmode.js"></script>
     <script src="assets/SN_componentManager.js"></script>
     <script src="script.js"></script>
@@ -17,7 +27,13 @@
         CodeMirror.modeURL = "/assets/orgmode.js";
     </script>
 
+    <!--
     <link rel="stylesheet" media="all" href="assets/CodeMirror/codemirror.css">
+    -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@latest/lib/codemirror.css" integrity="sha256-o/v/5fOniPHMAww4EAIfRBFV0SeoqksPrY0Yq5x+wSM=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@latest/addon/fold/foldgutter.css" integrity="sha256-V27800C3cLYNd9jCnp3za/WFdjkb6rUbQ5EU5O0BrFY=" crossorigin="anonymous">
+
     <link rel="stylesheet" media="all" href="styles.css">
 </head>
 
