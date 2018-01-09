@@ -120,5 +120,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     loadEditor();
     loadComponentManager();
+    CodeMirror.modeURL = "/assets/orgmode.js";
 
 });
