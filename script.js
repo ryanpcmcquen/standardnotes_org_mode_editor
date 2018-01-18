@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 minFoldSize: 1
             },
             indentUnit: 4,
-            keyMap: "emacs",
+//             keyMap: "emacs",
             lineNumbers: true,
             mode: "orgmode"
         });
