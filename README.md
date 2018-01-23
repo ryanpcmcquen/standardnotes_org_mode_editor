@@ -5,7 +5,7 @@ Now you can use Org mode in your encrypted cloud! Enjoy all the formatting and f
 
 -----
 
-Install link:
+## Install link:
 ```
 https://ryanpcmcquen.org/standardnotes_org_mode_editor/?type=component&area=editor-editor&name=Org mode
 ```
