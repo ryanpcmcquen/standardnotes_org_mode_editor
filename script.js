@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", event => {
+document.addEventListener("DOMContentLoaded", (event) => {
     let componentManagerInstance;
     let workingNote;
     let clientData;
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", event => {
     let ignoreTextChange = false;
     let initialLoad = true;
 
-    const changeMode = inputMode => {
+    const changeMode = (inputMode) => {
         let val = inputMode;
         let m;
         let mode;
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", event => {
         }
     };
 
-    const onReceivedNote = note => {
+    const onReceivedNote = (note) => {
         if (note.uuid !== lastUUID) {
             // Note has changed, reset last values:
             lastValue = null;
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", event => {
         let permissions = [{ name: "stream-context-item" }];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
-        componentManagerInstance.streamContextItem(note => {
+        componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
         });
     };
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", event => {
             foldGutter: {
                 minFoldSize: 1
             },
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             indentUnit: 4,
             keyMap: "emacs",
             lineNumbers: true,
