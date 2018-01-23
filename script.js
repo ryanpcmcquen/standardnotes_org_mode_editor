@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-
+document.addEventListener("DOMContentLoaded", event => {
     let componentManagerInstance;
     let workingNote;
     let clientData;
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let ignoreTextChange = false;
     let initialLoad = true;
 
-    const changeMode = (inputMode) => {
+    const changeMode = inputMode => {
         let val = inputMode;
         let m;
         let mode;
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (mode) {
             editor.setOption("mode", spec);
             CodeMirror.autoLoadMode(editor, mode);
-            
+
             if (clientData) {
                 clientData.mode = mode;
             }
@@ -44,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     };
 
-    const onReceivedNote = (note) => {
+    const onReceivedNote = note => {
         if (note.uuid !== lastUUID) {
-            // Note changed, reset last values
+            // Note has changed, reset last values:
             lastValue = null;
             initialLoad = true;
             lastUUID = note.uuid;
@@ -80,8 +79,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     const loadComponentManager = () => {
         let permissions = [{ name: "stream-context-item" }];
-        componentManagerInstance = new ComponentManager(permissions, function() {
-        });
+        componentManagerInstance = new ComponentManager(permissions, () => {});
 
         componentManagerInstance.streamContextItem(note => {
             onReceivedNote(note);
@@ -104,13 +102,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 minFoldSize: 1
             },
             indentUnit: 4,
-//             keyMap: "emacs",
+            keyMap: "emacs",
             lineNumbers: true,
             mode: "orgmode"
         });
         editor.setSize("100%", "100%");
 
-        editor.on("change", function() {
+        editor.on("change", () => {
             if (ignoreTextChange) {
                 return;
             }
@@ -121,5 +119,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
     loadEditor();
     loadComponentManager();
     CodeMirror.modeURL = "/assets/orgmode.js";
-
 });
