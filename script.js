@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+    "use strict";
+
     let componentManagerInstance;
     let workingNote;
     let clientData;
