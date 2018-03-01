@@ -6,9 +6,9 @@ Now you can use Org mode in your encrypted cloud! Enjoy all the formatting and f
 
 -----
 
-## Install link:
+## Install link (2.1+):
 ```
-https://ryanpcmcquen.org/standardnotes_org_mode_editor/?type=component&area=editor-editor&name=Org mode
+https://gitcdn.link/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/org_mode.json
 ```
 
 -----
