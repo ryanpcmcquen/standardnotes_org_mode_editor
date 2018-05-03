@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             indentUnit: 4,
             // keyMap: "emacs",
             lineNumbers: true,
+            lineWrapping: true,
             mode: "orgmode"
         });
         editor.setSize("100%", "100%");
