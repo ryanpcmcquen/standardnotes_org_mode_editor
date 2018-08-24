@@ -1,6 +1,18 @@
-import { gid, leftPad } from "./";
+//import { gid, leftPad } from "./";
 
-export function extractTodos(text){
+function gid(prefix){
+    let id = prefix !== undefined ? prefix : '';
+    id += new Date().getTime().toString(32);
+    id += parseInt(Math.random()*Math.pow(10,16)).toString(32);
+    return id;
+}
+
+function leftPad(str, length, pad = "0"){
+    if(typeof str !== 'string' || typeof pad !== 'string' || str.length >= length || !pad.length > 0) return str;
+    return leftPad(pad + str, length, pad);
+}
+
+function extractTodos(text){
     const headlines = parse(text);
     let todos = [];
     for(let i=0; i < headlines.length; i++){
@@ -46,7 +58,7 @@ export function extractTodos(text){
     }
 }
 
-export function extractEvents(text){
+function extractEvents(text){
     const headlines = parse(text);
     let events = [];
     for(let i=0; i < headlines.length; i++){
@@ -121,7 +133,7 @@ export function extractEvents(text){
 }
 
 
-export function parse(content){
+function parse(content){
     let todos = [], todo = reset(0), data, text, tags = [];
 
     const lines = content.split("\n");
