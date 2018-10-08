@@ -103,6 +103,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             foldGutter: {
                 minFoldSize: 1
             },
+            foldOptions: {
+                widget: "..."
+            },
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             indentUnit: 4,
             // keyMap: "emacs",
