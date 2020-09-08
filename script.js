@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             indentUnit: 4,
             // keyMap: "emacs",
-            lineNumbers: true,
+            lineNumbers: false,
             lineWrapping: true,
             mode: "orgmode"
         });
