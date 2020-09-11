@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (isLightMode) {
         editorContentIframe.style.filter = '';
     } else {
-        editorContentIframe..style.filter = 'invert(1) hue-rotate(180deg)';
+        editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
     }
 
     let componentManagerInstance;
