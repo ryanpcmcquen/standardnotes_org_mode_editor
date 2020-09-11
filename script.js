@@ -127,10 +127,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     loadComponentManager();
 
     // Assume light mode, but try to detect dark modes.
-    let isLightMode = true;
-    const editorContent = document.querySelector('#editor-content');
-    const editorContentIframe = editorContent.querySelector('iframe');
     try {
+        let isLightMode = true;
+        const editorContent = document.querySelector('#editor-content');
+        const editorContentIframe = editorContent.querySelector('iframe');
+
         isLightMode = JSON.parse(
             window
                 .getComputedStyle(editorContent)
@@ -143,12 +144,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 return true;
             }
         });
-    } catch (ignore) {}
 
-    if (isLightMode) {
-        editorContentIframe.style.filter = '';
-    } else {
-        editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
-    }
+        if (isLightMode) {
+            editorContentIframe.style.filter = '';
+        } else {
+            editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
+        }
+    } catch (ignore) {}
 
 });
