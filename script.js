@@ -1,6 +1,31 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     "use strict";
 
+    // Assume light mode, but try to detect dark modes.
+    let isLightMode = true;
+    const editorContent = document.querySelector('#editor-content');
+    const editorContentIframe = editorContent.querySelector('iframe');
+    try {
+        isLightMode = JSON.parse(
+            window
+                .getComputedStyle(editorContent)
+                ['background-color'].replace(/\(/, '[')
+                .replace(/\)/, ']')
+                .match(/\[.*/)
+                .pop()
+        ).some((color) => {
+            if (color > 150) {
+                return true;
+            }
+        });
+    } catch (ignore) {}
+
+    if (isLightMode) {
+        editorContentIframe.style.filter = '';
+    } else {
+        editorContentIframe..style.filter = 'invert(1) hue-rotate(180deg)';
+    }
+
     let componentManagerInstance;
     let workingNote;
     let clientData;
