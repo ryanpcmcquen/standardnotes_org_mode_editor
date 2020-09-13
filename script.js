@@ -101,19 +101,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         );
 
                         if (backgroundMatches.length > 0) {
-                            let isLightMode =
+                            let isDarkMode =
                                 backgroundMatches[0]
                                     .replace(
                                         '--sn-stylekit-background-color:',
                                         ''
                                     )
-                                    .match(/\d/g).length < 3;
+                                    .match(/\d/g).length > 3;
 
-                            if (isLightMode) {
-                                editor.getWrapperElement().style.filter = '';
-                            } else {
+                            if (isDarkMode) {
                                 editor.getWrapperElement().style.filter =
                                     'invert(1) hue-rotate(180deg)';
+                            } else {
+                                editor.getWrapperElement().style.filter = '';
                             }
                         }
                     })
