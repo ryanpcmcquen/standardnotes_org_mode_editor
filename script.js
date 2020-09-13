@@ -117,7 +117,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             }
                         }
                     })
-                    .catch(() => {});
+                    .catch((fetchErr) => {
+                        console.warn(
+                            'Theme fetch failed for dark mode detection: ',
+                            fetchErr
+                        );
+                    });
             });
         } catch (err) {
             console.warn('Dark mode detection failed: ', err);
