@@ -123,7 +123,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     })
                     .catch(() => {});
             });
-        } catch (ignore) {}
+        } catch (err) {
+            console.warn('Dark mode detection failed: ', err);
+        }
     };
 
     const save = () => {
