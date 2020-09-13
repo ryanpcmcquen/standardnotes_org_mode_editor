@@ -80,7 +80,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     };
 
     const loadComponentManager = () => {
-        let permissions = [{ name: "stream-context-item" }];
+        let permissions = [
+            { name: "stream-context-item" },
+            { name: "stream-items" }
+        ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
         componentManagerInstance.streamContextItem((note) => {
@@ -128,30 +131,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Assume light mode, but try to detect dark modes.
     try {
-        let isLightMode = true;
-        const editorContent = document.querySelector('#editor-content');
-        console.log('editorContent:', editorContent);
-        console.log(document.styleSheets);
-        const editorContentIframe = editorContent.querySelector('iframe');
+//         let isLightMode = true;
+//         const editorContent = document.querySelector('#editor-content');
+//         console.log('editorContent:', editorContent);
+//         console.log(document.styleSheets);
+//         const editorContentIframe = editorContent.querySelector('iframe');
 
-        isLightMode = JSON.parse(
-            window
-                .getComputedStyle(editorContent)
-                ['background-color'].replace(/\(/, '[')
-                .replace(/\)/, ']')
-                .match(/\[.*/)
-                .pop()
-        ).some((color) => {
-            if (color > 150) {
-                return true;
-            }
-        });
+//         isLightMode = JSON.parse(
+//             window
+//                 .getComputedStyle(editorContent)
+//                 ['background-color'].replace(/\(/, '[')
+//                 .replace(/\)/, ']')
+//                 .match(/\[.*/)
+//                 .pop()
+//         ).some((color) => {
+//             if (color > 150) {
+//                 return true;
+//             }
+//         });
 
-        if (isLightMode) {
-            editorContentIframe.style.filter = '';
-        } else {
-            editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
-        }
+//         if (isLightMode) {
+//             editorContentIframe.style.filter = '';
+//         } else {
+//             editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
+//         }
     } catch (ignore) {}
 
 });
