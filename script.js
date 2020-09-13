@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-    "use strict";
+document.addEventListener('DOMContentLoaded', (event) => {
+    'use strict';
 
     let componentManagerInstance;
     let workingNote;
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         if (mode) {
-            editor.setOption("mode", spec);
+            editor.setOption('mode', spec);
             CodeMirror.autoLoadMode(editor, mode);
 
             if (clientData) {
@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const loadComponentManager = () => {
         let permissions = [
-            { name: "stream-context-item" },
-            { name: "stream-items" }
+            { name: 'stream-context-item' },
+            { name: 'stream-items' }
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
@@ -90,9 +90,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
             onReceivedNote(note);
         });
 
-        componentManagerInstance.streamItems(["SN|Theme"], (items) => {
-            console.log(items);
-        });
+        // Assume light mode, but try to detect dark modes.
+        try {
+            componentManagerInstance.activeThemes.forEach((activeTheme) => {
+                fetch(activeTheme)
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.text();
+                        }
+                    })
+                    .then((css) => {
+                        const backgroundMatches = css.match(
+                            /--sn-stylekit-background-color:.*/
+                        );
+
+                        if (backgroundMatches.length > 0) {
+                            let isLightMode =
+                                backgroundMatches[0]
+                                    .replace(
+                                        '--sn-stylekit-background-color:',
+                                        ''
+                                    )
+                                    .match(/\d/g).length > 3;
+
+                            if (isLightMode) {
+                                editor.getWrapperElement().style.filter = '';
+                            } else {
+                                editor.getWrapperElement().style.filter =
+                                    'invert(1) hue-rotate(180deg)';
+                            }
+                        }
+                    })
+                    .catch(() => {});
+            });
+        } catch (ignore) {}
     };
 
     const save = () => {
@@ -105,24 +136,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
     };
 
     const loadEditor = () => {
-        editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
+        editor = CodeMirror.fromTextArea(document.querySelector('.orgmode'), {
             autofocus: true,
             foldGutter: {
                 minFoldSize: 1
             },
             foldOptions: {
-                widget: "..."
+                widget: '...'
             },
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
             indentUnit: 4,
             // keyMap: "emacs",
             lineNumbers: false,
             lineWrapping: true,
-            mode: "orgmode"
+            mode: 'orgmode'
         });
-        editor.setSize("100%", "100%");
+        editor.setSize('100%', '100%');
 
-        editor.on("change", () => {
+        editor.on('change', () => {
             if (ignoreTextChange) {
                 return;
             }
@@ -132,33 +163,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     loadEditor();
     loadComponentManager();
-
-    // Assume light mode, but try to detect dark modes.
-    try {
-//         let isLightMode = true;
-//         const editorContent = document.querySelector('#editor-content');
-//         console.log('editorContent:', editorContent);
-//         console.log(document.styleSheets);
-//         const editorContentIframe = editorContent.querySelector('iframe');
-
-//         isLightMode = JSON.parse(
-//             window
-//                 .getComputedStyle(editorContent)
-//                 ['background-color'].replace(/\(/, '[')
-//                 .replace(/\)/, ']')
-//                 .match(/\[.*/)
-//                 .pop()
-//         ).some((color) => {
-//             if (color > 150) {
-//                 return true;
-//             }
-//         });
-
-//         if (isLightMode) {
-//             editorContentIframe.style.filter = '';
-//         } else {
-//             editorContentIframe.style.filter = 'invert(1) hue-rotate(180deg)';
-//         }
-    } catch (ignore) {}
-
 });
