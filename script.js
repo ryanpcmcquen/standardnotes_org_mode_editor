@@ -86,11 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
-        componentManagerInstance.streamContextItem((note) => {
-            onReceivedNote(note);
-        });
-
-        // Assume light mode, but try to detect dark modes.
+        // Crazy dark mode detector.
         try {
             componentManagerInstance.activeThemes.forEach((activeTheme) => {
                 fetch(activeTheme)
@@ -126,6 +122,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } catch (err) {
             console.warn('Dark mode detection failed: ', err);
         }
+
+        componentManagerInstance.streamContextItem((note) => {
+            onReceivedNote(note);
+        });
+
     };
 
     const save = () => {
