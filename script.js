@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let isLightMode = true;
         const editorContent = document.querySelector('#editor-content');
         console.log('editorContent:', editorContent);
+        console.log(document.styleSheets);
         const editorContentIframe = editorContent.querySelector('iframe');
 
         isLightMode = JSON.parse(
@@ -153,9 +154,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
     } catch (ignore) {}
 
-});
-
-window.addEventListener('load', () => {
-    const editorContent = document.querySelector('#editor-content');
-    console.log('load editorContent:', editorContent);
 });
