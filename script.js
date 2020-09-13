@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             onReceivedNote(note);
         });
 
-        componentManagerInstance.streamItems(["SN|Component", "SN|Theme", "SF|Extension", "Extension"], (items) => {
+        componentManagerInstance.streamItems(["SN|Theme"], (items) => {
             console.log(items);
         });
     };
