@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    'use strict';
+document.addEventListener("DOMContentLoaded", (event) => {
+    "use strict";
 
     let componentManagerInstance;
     let workingNote;
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         if (mode) {
-            editor.setOption('mode', spec);
+            editor.setOption("mode", spec);
             CodeMirror.autoLoadMode(editor, mode);
 
             if (clientData) {
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const loadComponentManager = () => {
         let permissions = [
-            { name: 'stream-context-item' },
-            { name: 'stream-items' }
+            { name: "stream-context-item" },
+            { name: "stream-items" },
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
@@ -108,16 +108,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             let isLightMode =
                                 backgroundMatches[0]
                                     .replace(
-                                        '--sn-stylekit-background-color:',
-                                        ''
+                                        "--sn-stylekit-background-color:",
+                                        ""
                                     )
                                     .match(/\d/g).length > 3;
 
                             if (isLightMode) {
-                                editor.getWrapperElement().style.filter = '';
+                                editor.getWrapperElement().style.filter = "";
                             } else {
                                 editor.getWrapperElement().style.filter =
-                                    'invert(1) hue-rotate(180deg)';
+                                    "invert(1) hue-rotate(180deg)";
                             }
                         }
                     })
@@ -136,24 +136,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     const loadEditor = () => {
-        editor = CodeMirror.fromTextArea(document.querySelector('.orgmode'), {
+        editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
             autofocus: true,
             foldGutter: {
-                minFoldSize: 1
+                minFoldSize: 1,
             },
             foldOptions: {
-                widget: '...'
+                widget: "...",
             },
-            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             indentUnit: 4,
             keyMap: "emacs",
             lineNumbers: false,
             lineWrapping: true,
-            mode: 'orgmode'
+            mode: "orgmode",
         });
-        editor.setSize('100%', '100%');
+        editor.setSize("100%", "100%");
 
-        editor.on('change', () => {
+        editor.on("change", () => {
             if (ignoreTextChange) {
                 return;
             }

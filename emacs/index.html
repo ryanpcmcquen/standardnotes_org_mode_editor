@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <base target="_blank" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-    <base target="_blank">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.css"
+        />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.css">
+        <link rel="stylesheet" media="all" href="styles.css" />
 
-    <link rel="stylesheet" media="all" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/keymap/emacs.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/keymap/emacs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/mode/simple.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/mode/simple.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/search.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/searchcursor.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/search.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/searchcursor.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldcode.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/sn-extensions/components-api/dist/dist.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/sn-extensions/components-api/dist/dist.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/mickael-kerjean/codemirror-orgmode/orgmode-mode.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/mickael-kerjean/codemirror-orgmode/orgmode-fold.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/mickael-kerjean/codemirror-orgmode/orgmode-mode.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/mickael-kerjean/codemirror-orgmode/orgmode-fold.js"></script>
+        <script src="script.js"></script>
+    </head>
 
-    <script src="script.js"></script>
-</head>
-
-<body>
-    <div class="wrapper">
-        <textarea class="orgmode"></textarea>
-    </div>
-</body>
-
+    <body>
+        <div class="wrapper">
+            <textarea class="orgmode"></textarea>
+        </div>
+    </body>
 </html>

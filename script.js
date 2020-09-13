@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const loadComponentManager = () => {
         let permissions = [
             { name: 'stream-context-item' },
-            { name: 'stream-items' }
+            { name: 'stream-items' },
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
         });
-
     };
 
     const save = () => {
@@ -142,17 +141,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         editor = CodeMirror.fromTextArea(document.querySelector('.orgmode'), {
             autofocus: true,
             foldGutter: {
-                minFoldSize: 1
+                minFoldSize: 1,
             },
             foldOptions: {
-                widget: '...'
+                widget: '...',
             },
             gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
             indentUnit: 4,
             // keyMap: "emacs",
             lineNumbers: false,
             lineWrapping: true,
-            mode: 'orgmode'
+            mode: 'orgmode',
         });
         editor.setSize('100%', '100%');
 
