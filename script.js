@@ -89,6 +89,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
         });
+
+        componentManagerInstance.streamItems("SN|Theme", (items) => {
+            console.log(items);
+        });
     };
 
     const save = () => {
