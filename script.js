@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         '--sn-stylekit-background-color:',
                                         ''
                                     )
-                                    .match(/\d/g).length > 3;
+                                    .match(/\d/g).length < 3;
 
                             if (isLightMode) {
                                 editor.getWrapperElement().style.filter = '';
