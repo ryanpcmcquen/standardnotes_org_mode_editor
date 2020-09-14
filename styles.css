@@ -5,12 +5,14 @@ html {
     height: 100%;
     margin: 0;
 }
+
 .wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
     height: 100%;
 }
+
 .CodeMirror {
     flex: 1 1 auto;
     width: 100%;
@@ -22,4 +24,8 @@ html {
     font-family: monospace;
     padding: 0;
     background-color: transparent;
+}
+
+.__data_from_root__ {
+    color: var(--sn-stylekit-background-color);
 }
