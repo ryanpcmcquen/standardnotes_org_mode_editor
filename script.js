@@ -80,20 +80,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     const loadComponentManager = () => {
-        let permissions = [
-            { name: 'stream-context-item' }
-        ];
+        let permissions = [{ name: 'stream-context-item' }];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
         // Crazy dark mode detector.
         try {
             const dataFromRoot = document.querySelector('.__data_from_root__');
-            console.log(dataFromRoot);
-            if (dataFromRoot) {
-                console.log(getComputedStyle(dataFromRoot));
-                let isDarkMode =
-                    getComputedStyle(dataFromRoot).color.match(/\d/g).length > 3;
 
+            if (dataFromRoot) {
+                let isDarkMode =
+                    JSON.parse(
+                        getComputedStyle(dataFromRoot)
+                            .color.replace(/^rgb\(/, '[')
+                            .replace(/\)$/, ']')
+                    ).filter((color) => {
+                        if (color < 150) {
+                            return color;
+                        }
+                    }).length > 1;
                 if (isDarkMode) {
                     editor.getWrapperElement().style.filter =
                         'invert(1) hue-rotate(180deg)';
