@@ -83,30 +83,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let permissions = [{ name: 'stream-context-item' }];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
-        // Crazy dark mode detector.
-        try {
-            const dataFromRoot = document.querySelector('.__data_from_root__');
-
-            if (dataFromRoot) {
-                let isDarkMode =
-                    JSON.parse(
-                        getComputedStyle(dataFromRoot)
-                            .color.replace(/^rgb\(/, '[')
-                            .replace(/\)$/, ']')
-                    ).filter((color) => {
-                        return (color < 150);
-                    }).length > 1;
-                if (isDarkMode) {
-                    editor.getWrapperElement().style.filter =
-                        'invert(1) hue-rotate(180deg)';
-                } else {
-                    editor.getWrapperElement().style.filter = '';
-                }
-            }
-        } catch (err) {
-            console.warn('Dark mode detection failed: ', err);
-        }
-
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
         });
@@ -149,4 +125,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     loadEditor();
     loadComponentManager();
+
+    // Crazy dark mode detector.
+    try {
+        const dataFromRoot = document.querySelector('.__data_from_root__');
+
+        if (dataFromRoot) {
+            let isDarkMode =
+                JSON.parse(
+                    getComputedStyle(dataFromRoot)
+                        .color.replace(/^rgb\(/, '[')
+                        .replace(/\)$/, ']')
+                ).filter((color) => {
+                    return (color < 150);
+                }).length > 1;
+            if (isDarkMode) {
+                editor.getWrapperElement().style.filter =
+                    'invert(1) hue-rotate(180deg)';
+            } else {
+                editor.getWrapperElement().style.filter = '';
+            }
+        }
+    } catch (err) {
+        console.warn('Dark mode detection failed: ', err);
+    }
+
 });
