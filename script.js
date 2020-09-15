@@ -81,8 +81,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const loadComponentManager = () => {
         let permissions = [
-            { name: 'stream-context-item' },
-            { name: 'stream-items' }
+            { name: 'stream-context-item' }
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
@@ -91,8 +90,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const dataFromRoot = document.querySelector('.__data_from_root__');
             console.log(dataFromRoot);
             if (dataFromRoot) {
+                console.log(getComputedStyle(dataFromRoot));
                 let isDarkMode =
-                    dataFromRoot.style.color.match(/\d/g).length > 3;
+                    getComputedStyle(dataFromRoot).color.match(/\d/g).length > 3;
 
                 if (isDarkMode) {
                     editor.getWrapperElement().style.filter =
