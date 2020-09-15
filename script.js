@@ -94,9 +94,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             .color.replace(/^rgb\(/, '[')
                             .replace(/\)$/, ']')
                     ).filter((color) => {
-                        if (color < 150) {
-                            return color;
-                        }
+                        return (color < 150);
                     }).length > 1;
                 if (isDarkMode) {
                     editor.getWrapperElement().style.filter =
