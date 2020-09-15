@@ -82,48 +82,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const loadComponentManager = () => {
         let permissions = [
             { name: 'stream-context-item' },
-            { name: 'stream-items' },
+            { name: 'stream-items' }
         ];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
         // Crazy dark mode detector.
         try {
-            componentManagerInstance.activeThemes.forEach((activeTheme) => {
-                fetch(activeTheme)
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.text();
-                        }
-                    })
-                    .then((css) => {
-                        const backgroundMatches = css.match(
-                            /--sn-stylekit-background-color:.*/
-                        );
+            const dataFromRoot = document.querySelector('.__data_from_root__');
+            console.log(dataFromRoot);
+            if (dataFromRoot) {
+                let isDarkMode =
+                    dataFromRoot.style.color.match(/\d/g).length > 3;
 
-                        if (backgroundMatches.length > 0) {
-                            let isDarkMode =
-                                backgroundMatches[0]
-                                    .replace(
-                                        '--sn-stylekit-background-color:',
-                                        ''
-                                    )
-                                    .match(/\d/g).length > 3;
-
-                            if (isDarkMode) {
-                                editor.getWrapperElement().style.filter =
-                                    'invert(1) hue-rotate(180deg)';
-                            } else {
-                                editor.getWrapperElement().style.filter = '';
-                            }
-                        }
-                    })
-                    .catch((fetchErr) => {
-                        console.warn(
-                            'Theme fetch failed for dark mode detection: ',
-                            fetchErr
-                        );
-                    });
-            });
+                if (isDarkMode) {
+                    editor.getWrapperElement().style.filter =
+                        'invert(1) hue-rotate(180deg)';
+                } else {
+                    editor.getWrapperElement().style.filter = '';
+                }
+            }
         } catch (err) {
             console.warn('Dark mode detection failed: ', err);
         }
@@ -146,17 +123,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         editor = CodeMirror.fromTextArea(document.querySelector('.orgmode'), {
             autofocus: true,
             foldGutter: {
-                minFoldSize: 1,
+                minFoldSize: 1
             },
             foldOptions: {
-                widget: '...',
+                widget: '...'
             },
             gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
             indentUnit: 4,
             // keyMap: "emacs",
             lineNumbers: false,
             lineWrapping: true,
-            mode: 'orgmode',
+            mode: 'orgmode'
         });
         editor.setSize('100%', '100%');
 
