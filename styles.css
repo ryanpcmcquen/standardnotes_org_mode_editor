@@ -27,5 +27,6 @@ html {
 }
 
 .__data_from_root__ {
+    display: none;
     color: var(--sn-stylekit-background-color);
 }
