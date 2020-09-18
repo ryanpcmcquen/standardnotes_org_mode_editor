@@ -24,6 +24,13 @@ html {
     font-family: monospace;
     padding: 0;
     background-color: transparent;
+
+    /* Theme chooser adjustments: */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 14px;
+    left: 0;
 }
 
 .__data_from_root__ {
