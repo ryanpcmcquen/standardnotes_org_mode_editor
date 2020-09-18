@@ -9,13 +9,13 @@ Now you can use Org mode in your encrypted cloud! Enjoy all the formatting and f
 ## Install link (2.1+):
 
 ```
-https://gitcdn.link/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/org_mode.json
+https://gitcdn.xyz/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/org_mode.json
 ```
 
 ## Emacs Version Install link (2.1+):
 
 ```
-https://gitcdn.link/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/emacs/org_mode.json
+https://gitcdn.xyz/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/emacs/org_mode.json
 ```
 
 ---
