@@ -33,10 +33,12 @@ html {
     left: 0;
 }
 
+/*
 .__data_from_root__ {
     display: none;
     color: var(--sn-stylekit-background-color);
 }
+*/
 
 .info {
     white-space: nowrap;
@@ -59,9 +61,9 @@ html {
 .theme-chooser label {
     float: left;
     width: 40px;
-    background-color: #EFEFEF;
+    background-color: #efefef;
     border-radius: 4px;
-    border: 1px solid #D0D0D0;
+    border: 1px solid #d0d0d0;
     overflow: auto;
 }
 
@@ -86,7 +88,7 @@ html {
     display: none;
 }
 
-.theme-chooser input:checked+span {
+.theme-chooser input:checked + span {
     background-color: #404040;
-    color: #F7F7F7;
+    color: #f7f7f7;
 }

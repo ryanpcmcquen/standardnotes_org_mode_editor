@@ -9,6 +9,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.css"
         />
+
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.css"
@@ -36,7 +37,7 @@
     </head>
 
     <body>
-        <span hidden class="__data_from_root__"></span>
+        <!-- <span hidden class="__data_from_root__"></span> -->
         <div class="wrapper">
             <textarea class="orgmode"></textarea>
         </div>
@@ -44,11 +45,15 @@
         <div class="info">
             <div class="theme-chooser">
                 <label>
-                    <input type="radio" name="toggle" value="light">
+                    <input type="radio" name="toggle" value="" />
                     <span>Light</span>
                 </label>
                 <label>
-                    <input type="radio" name="toggle" value="dark">
+                    <input
+                        type="radio"
+                        name="toggle"
+                        value="invert(1) hue-rotate(180deg)"
+                    />
                     <span>Dark</span>
                 </label>
             </div>

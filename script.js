@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    'use strict';
+document.addEventListener("DOMContentLoaded", (event) => {
+    "use strict";
 
     let componentManagerInstance;
     let workingNote;
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         if (mode) {
-            editor.setOption('mode', spec);
+            editor.setOption("mode", spec);
             CodeMirror.autoLoadMode(editor, mode);
 
             if (clientData) {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     const loadComponentManager = () => {
-        let permissions = [{ name: 'stream-context-item' }];
+        let permissions = [{ name: "stream-context-item" }];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
         componentManagerInstance.streamContextItem((note) => {
@@ -98,24 +98,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     const loadEditor = () => {
-        editor = CodeMirror.fromTextArea(document.querySelector('.orgmode'), {
+        editor = CodeMirror.fromTextArea(document.querySelector(".orgmode"), {
             autofocus: true,
             foldGutter: {
-                minFoldSize: 1
+                minFoldSize: 1,
             },
             foldOptions: {
-                widget: '...'
+                widget: "...",
             },
-            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             indentUnit: 4,
             // keyMap: "emacs",
             lineNumbers: false,
             lineWrapping: true,
-            mode: 'orgmode'
+            mode: "orgmode",
         });
-        editor.setSize('100%', '100%');
+        editor.setSize("100%", "100%");
 
-        editor.on('change', () => {
+        editor.on("change", () => {
             if (ignoreTextChange) {
                 return;
             }
@@ -127,27 +127,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadComponentManager();
 
     // Crazy dark mode detector.
-    try {
-        const dataFromRoot = document.querySelector('.__data_from_root__');
+    // try {
+    //     const dataFromRoot = document.querySelector('.__data_from_root__');
 
-        if (dataFromRoot) {
-            let isDarkMode =
-                JSON.parse(
-                    getComputedStyle(dataFromRoot)
-                        .color.replace(/^rgb\(/, '[')
-                        .replace(/\)$/, ']')
-                ).filter((color) => {
-                    return (color < 150);
-                }).length > 1;
-            if (isDarkMode) {
-                editor.getWrapperElement().style.filter =
-                    'invert(1) hue-rotate(180deg)';
-            } else {
-                editor.getWrapperElement().style.filter = '';
-            }
+    //     if (dataFromRoot) {
+    //         let isDarkMode =
+    //             JSON.parse(
+    //                 getComputedStyle(dataFromRoot)
+    //                     .color.replace(/^rgb\(/, '[')
+    //                     .replace(/\)$/, ']')
+    //             ).filter((color) => {
+    //                 return (color < 150);
+    //             }).length > 1;
+    //         if (isDarkMode) {
+    //             editor.getWrapperElement().style.filter =
+    //                 'invert(1) hue-rotate(180deg)';
+    //         } else {
+    //             editor.getWrapperElement().style.filter = '';
+    //         }
+    //     }
+    // } catch (err) {
+    //     console.warn('Dark mode detection failed: ', err);
+    // }
+
+    const result = window.localStorage.getItem("orgModePreferences");
+    const orgModePreferences = result.orgModePreferences;
+    const defaultTheme = orgModePreferences ? orgModePreferences.theme : "";
+    document.querySelector(`[value=${defaultTheme}]`).checked = true;
+
+    // Change themes:
+    const themeChooser = document.querySelector(".theme-chooser");
+    themeChooser.addEventListener("click", (event) => {
+        if (/INPUT/.test(event.target.tagName)) {
+            editor.getWrapperElement().style.filter = event.target.value;
+
+            window.localStorage.setItem({
+                orgModePreferences: {
+                    themeFilter: event.target.value,
+                },
+            });
         }
-    } catch (err) {
-        console.warn('Dark mode detection failed: ', err);
-    }
-
+    });
 });
