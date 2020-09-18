@@ -9,12 +9,13 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.css"
         />
+
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.css"
         />
 
-        <link rel="stylesheet" media="all" href="styles.css" />
+        <link rel="stylesheet" media="all" href="org_mode.css" />
 
         <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/codemirror@5/keymap/emacs.min.js"></script>
@@ -36,8 +37,22 @@
     </head>
 
     <body>
+        <!-- <span hidden class="__data_from_root__"></span> -->
         <div class="wrapper">
             <textarea class="orgmode"></textarea>
+        </div>
+
+        <div class="info">
+            <div class="theme-chooser">
+                <label>
+                    <input type="radio" name="toggle" value="light" />
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" name="toggle" value="dark" />
+                    <span>Dark</span>
+                </label>
+            </div>
         </div>
     </body>
 </html>

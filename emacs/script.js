@@ -80,50 +80,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     };
 
     const loadComponentManager = () => {
-        let permissions = [
-            { name: "stream-context-item" },
-            { name: "stream-items" },
-        ];
+        let permissions = [{ name: "stream-context-item" }];
         componentManagerInstance = new ComponentManager(permissions, () => {});
 
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
         });
-
-        // Assume light mode, but try to detect dark modes.
-        try {
-            componentManagerInstance.activeThemes.forEach((activeTheme) => {
-                fetch(activeTheme)
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.text();
-                        }
-                    })
-                    .then((css) => {
-                        const backgroundMatches = css.match(
-                            /--sn-stylekit-background-color:.*/
-                        );
-
-                        if (backgroundMatches.length > 0) {
-                            let isLightMode =
-                                backgroundMatches[0]
-                                    .replace(
-                                        "--sn-stylekit-background-color:",
-                                        ""
-                                    )
-                                    .match(/\d/g).length > 3;
-
-                            if (isLightMode) {
-                                editor.getWrapperElement().style.filter = "";
-                            } else {
-                                editor.getWrapperElement().style.filter =
-                                    "invert(1) hue-rotate(180deg)";
-                            }
-                        }
-                    })
-                    .catch(() => {});
-            });
-        } catch (ignore) {}
     };
 
     const save = () => {
@@ -163,4 +125,58 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     loadEditor();
     loadComponentManager();
+
+    // Crazy dark mode detector.
+    // try {
+    //     const dataFromRoot = document.querySelector('.__data_from_root__');
+
+    //     if (dataFromRoot) {
+    //         let isDarkMode =
+    //             JSON.parse(
+    //                 getComputedStyle(dataFromRoot)
+    //                     .color.replace(/^rgb\(/, '[')
+    //                     .replace(/\)$/, ']')
+    //             ).filter((color) => {
+    //                 return (color < 150);
+    //             }).length > 1;
+    //         if (isDarkMode) {
+    //             editor.getWrapperElement().style.filter =
+    //                 'invert(1) hue-rotate(180deg)';
+    //         } else {
+    //             editor.getWrapperElement().style.filter = '';
+    //         }
+    //     }
+    // } catch (err) {
+    //     console.warn('Dark mode detection failed: ', err);
+    // }
+
+    // Change themes:
+    const themeFilters = {
+        light: "",
+        dark: "invert(1) hue-rotate(180deg)",
+    };
+    const themeChooser = document.querySelector(".theme-chooser");
+    themeChooser.addEventListener("click", (event) => {
+        if (/INPUT/.test(event.target.tagName)) {
+            editor.getWrapperElement().style.filter =
+                themeFilters[event.target.value];
+
+            window.localStorage.setItem(
+                "orgModePreferences",
+                JSON.stringify({
+                    themeFilter: event.target.value,
+                })
+            );
+        }
+    });
+
+    // Load saved theme filters from local storage:
+    const result = window.localStorage.getItem("orgModePreferences");
+    if (result) {
+        const orgModePreferences = JSON.parse(result);
+        const defaultTheme = orgModePreferences
+            ? orgModePreferences.themeFilter
+            : "light";
+        document.querySelector(`[value=${defaultTheme}]`).click();
+    }
 });
