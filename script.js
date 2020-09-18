@@ -150,22 +150,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //     console.warn('Dark mode detection failed: ', err);
     // }
 
-    const result = window.localStorage.getItem("orgModePreferences");
-    const orgModePreferences = result.orgModePreferences;
-    const defaultTheme = orgModePreferences ? orgModePreferences.theme : "";
-    document.querySelector(`[value=${defaultTheme}]`).checked = true;
-
     // Change themes:
+    const themeFilters = {
+        light: "",
+        dark: "invert(1) hue-rotate(180deg)",
+    };
     const themeChooser = document.querySelector(".theme-chooser");
     themeChooser.addEventListener("click", (event) => {
         if (/INPUT/.test(event.target.tagName)) {
-            editor.getWrapperElement().style.filter = event.target.value;
+            editor.getWrapperElement().style.filter =
+                themeFilters[event.target.value];
 
-            window.localStorage.setItem({
-                orgModePreferences: {
+            window.localStorage.setItem(
+                "orgModePreferences",
+                JSON.stringify({
                     themeFilter: event.target.value,
-                },
-            });
+                })
+            );
         }
     });
+
+    // Load saved theme filters from local storage:
+    const result = window.localStorage.getItem("orgModePreferences");
+    if (result) {
+        const orgModePreferences = JSON.parse(result);
+        const defaultTheme = orgModePreferences
+            ? orgModePreferences.themeFilter
+            : "light";
+        document.querySelector(`[value=${defaultTheme}]`).click();
+    }
 });
