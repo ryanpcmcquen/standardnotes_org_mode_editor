@@ -45,7 +45,7 @@ html {
     position: absolute;
     bottom: 0;
     background: #eeeeee;
-    padding: 5px 10px;
+    padding: 5px;
     height: 1.95vh;
     left: 0;
     right: 0;
@@ -54,7 +54,7 @@ html {
 
 .theme-chooser {
     float: right;
-    margin-right: -10px;
+    margin-top: 1px;
 }
 
 .theme-chooser label {
