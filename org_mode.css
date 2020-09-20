@@ -10,17 +10,16 @@ html {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 97vh;
+    height: 95vh;
 }
 
 .CodeMirror {
     flex: 1 1 auto;
     width: 100%;
-    height: 100%;
+    height: 95vh;
     resize: none;
     font-size: 16px;
     border-radius: 4px;
-    padding: 15px;
     font-family: monospace;
     padding: 0;
     background-color: transparent;
@@ -29,7 +28,7 @@ html {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 15px;
+    bottom: 5vh;
     left: 0;
 }
 
@@ -46,7 +45,7 @@ html {
     bottom: 0;
     background: #eeeeee;
     padding: 5px;
-    height: 2.95vh;
+    height: 3vh;
     left: 0;
     right: 0;
     z-index: 10;
