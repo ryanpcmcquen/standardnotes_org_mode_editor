@@ -53,6 +53,7 @@ html {
 
 .theme-chooser {
     float: right;
+    padding-top: 1px;
 }
 
 .theme-chooser label {
