@@ -10,16 +10,15 @@ html {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 95vh;
+    height: 94vh;
 }
 
 .CodeMirror {
     flex: 1 1 auto;
     width: 100%;
-    height: 95vh;
     resize: none;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 2px;
     font-family: monospace;
     padding: 0;
     background-color: transparent;
@@ -45,10 +44,11 @@ html {
     bottom: 0;
     background: #eeeeee;
     padding: 5px;
-    height: 3vh;
+    height: 5vh;
     left: 0;
     right: 0;
     z-index: 10;
+    overflow: hidden;
 }
 
 .theme-chooser {
