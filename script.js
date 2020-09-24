@@ -81,7 +81,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const loadComponentManager = () => {
         let permissions = [{ name: "stream-context-item" }];
-        componentManagerInstance = new ComponentManager(permissions, () => {});
+        componentManagerInstance = new ComponentManager(permissions, () => {
+            // Ready, go!
+            const platform = componentManagerInstance.platform;
+            if (platform) {
+                document.body.classList.add(platform);
+            }
+        });
 
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
@@ -90,10 +96,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const save = () => {
         if (workingNote) {
-            lastValue = editor.getValue();
-            workingNote.content.text = lastValue;
-            workingNote.clientData = clientData;
-            componentManagerInstance.saveItem(workingNote);
+            // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
+            // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be
+            // applied to the right object, and it will save incorrectly.
+            let note = workingNote;
+
+            componentManagerInstance.saveItemWithPresave(note, () => {
+                lastValue = editor.getValue();
+                note.content.text = lastValue;
+                note.clientData = clientData;
+
+                note.content.preview_plain = null;
+                note.content.preview_html = null;
+            });
         }
     };
 
