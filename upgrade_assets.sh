@@ -1,3 +1,3 @@
-for ASSET in $(grep -Eio 'src="(https://[^"]*)"' emacs/index.html | cut -d '"' -f 2); do
+for ASSET in $(cat assets.txt); do
     wget -N $ASSET -P assets/
 done
