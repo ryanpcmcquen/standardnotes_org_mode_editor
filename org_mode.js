@@ -7,43 +7,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let lastValue;
     let lastUUID;
     let editor;
-    // let modeInput;
-    // let select;
     let ignoreTextChange = false;
     let initialLoad = true;
-
-    // const changeMode = (inputMode) => {
-    //     let val = inputMode;
-    //     let m;
-    //     let mode;
-    //     let spec;
-    //     if ((m = /.+\.([^.]+)$/.exec(val))) {
-    //         let info = CodeMirror.findModeByExtension(m[1]);
-    //         if (info) {
-    //             mode = info.mode;
-    //             spec = info.mime;
-    //         }
-    //     } else if (/\//.test(val)) {
-    //         let info = CodeMirror.findModeByMIME(val);
-    //         if (info) {
-    //             mode = info.mode;
-    //             spec = val;
-    //         }
-    //     } else {
-    //         mode = spec = val;
-    //     }
-
-    //     if (mode) {
-    //         editor.setOption("mode", spec);
-    //         CodeMirror.autoLoadMode(editor, mode);
-
-    //         if (clientData) {
-    //             clientData.mode = mode;
-    //         }
-    //     } else {
-    //         console.error(`Could not find a mode corresponding to: ${val}`);
-    //     }
-    // };
 
     const onReceivedNote = (note) => {
         if (note.uuid !== lastUUID) {
@@ -59,11 +24,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             return;
         }
         clientData = note.clientData;
-
-        // let mode = clientData.mode;
-        // if (mode) {
-        //     changeMode(mode);
-        // }
 
         if (editor) {
             if (note.content.text !== lastValue) {

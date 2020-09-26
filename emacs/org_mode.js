@@ -7,43 +7,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let lastValue;
     let lastUUID;
     let editor;
-    let modeInput;
-    let select;
     let ignoreTextChange = false;
     let initialLoad = true;
-
-    const changeMode = (inputMode) => {
-        let val = inputMode;
-        let m;
-        let mode;
-        let spec;
-        if ((m = /.+\.([^.]+)$/.exec(val))) {
-            let info = CodeMirror.findModeByExtension(m[1]);
-            if (info) {
-                mode = info.mode;
-                spec = info.mime;
-            }
-        } else if (/\//.test(val)) {
-            let info = CodeMirror.findModeByMIME(val);
-            if (info) {
-                mode = info.mode;
-                spec = val;
-            }
-        } else {
-            mode = spec = val;
-        }
-
-        if (mode) {
-            editor.setOption("mode", spec);
-            CodeMirror.autoLoadMode(editor, mode);
-
-            if (clientData) {
-                clientData.mode = mode;
-            }
-        } else {
-            console.error(`Could not find a mode corresponding to: ${val}`);
-        }
-    };
 
     const onReceivedNote = (note) => {
         if (note.uuid !== lastUUID) {
@@ -59,11 +24,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             return;
         }
         clientData = note.clientData;
-
-        let mode = clientData.mode;
-        if (mode) {
-            changeMode(mode);
-        }
 
         if (editor) {
             if (note.content.text !== lastValue) {
@@ -81,7 +41,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const loadComponentManager = () => {
         let permissions = [{ name: "stream-context-item" }];
-        componentManagerInstance = new ComponentManager(permissions, () => {});
+        componentManagerInstance = new ComponentManager(permissions, () => {
+            // Ready, go!
+            const platform = componentManagerInstance.platform;
+            if (platform) {
+                document.body.classList.add(platform);
+            }
+        });
 
         componentManagerInstance.streamContextItem((note) => {
             onReceivedNote(note);
@@ -90,10 +56,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const save = () => {
         if (workingNote) {
-            lastValue = editor.getValue();
-            workingNote.content.text = lastValue;
-            workingNote.clientData = clientData;
-            componentManagerInstance.saveItem(workingNote);
+            // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
+            // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be
+            // applied to the right object, and it will save incorrectly.
+            let note = workingNote;
+
+            componentManagerInstance.saveItemWithPresave(note, () => {
+                lastValue = editor.getValue();
+                note.content.text = lastValue;
+                note.clientData = clientData;
+
+                note.content.preview_plain = null;
+                note.content.preview_html = null;
+            });
         }
     };
 
@@ -150,33 +125,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //     console.warn('Dark mode detection failed: ', err);
     // }
 
-    // Change themes:
-    const themeFilters = {
-        light: "",
-        dark: "invert(1) hue-rotate(180deg)",
-    };
-    const themeChooser = document.querySelector(".theme-chooser");
-    themeChooser.addEventListener("click", (event) => {
-        if (/INPUT/.test(event.target.tagName)) {
-            editor.getWrapperElement().style.filter =
-                themeFilters[event.target.value];
+    try {
+        // Change themes:
+        const themeFilters = {
+            light: "",
+            dark: "invert(1) hue-rotate(180deg)",
+        };
+        const themeChooser = document.querySelector(".theme-chooser");
+        themeChooser.addEventListener("click", (event) => {
+            if (/INPUT/.test(event.target.tagName)) {
+                editor.getWrapperElement().style.filter =
+                    themeFilters[event.target.value];
 
-            window.localStorage.setItem(
-                "orgModePreferences",
-                JSON.stringify({
-                    themeFilter: event.target.value,
-                })
-            );
+                window.localStorage.setItem(
+                    "orgModePreferences",
+                    JSON.stringify({
+                        themeFilter: event.target.value,
+                    })
+                );
+            }
+        });
+
+        // Load saved theme filters from local storage:
+        const result = window.localStorage.getItem("orgModePreferences");
+        if (result) {
+            const orgModePreferences = JSON.parse(result);
+            const defaultTheme = orgModePreferences
+                ? orgModePreferences.themeFilter
+                : "light";
+            document.querySelector(`[value=${defaultTheme}]`).click();
         }
-    });
-
-    // Load saved theme filters from local storage:
-    const result = window.localStorage.getItem("orgModePreferences");
-    if (result) {
-        const orgModePreferences = JSON.parse(result);
-        const defaultTheme = orgModePreferences
-            ? orgModePreferences.themeFilter
-            : "light";
-        document.querySelector(`[value=${defaultTheme}]`).click();
-    }
+    } catch (ignore) {}
 });
