@@ -90,10 +90,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
         editor.setSize("100%", "100%");
 
-        editor.on("change", () => {
+        let wait;
+        let changing = false;
+
+        editor.on("change", (cm, change) => {
             if (ignoreTextChange) {
                 return;
             }
+            clearTimeout(wait);
+            wait = setTimeout(() => {
+                changing = true;
+                cm.wrapParagraphsInRange(
+                    change.from,
+                    CodeMirror.changeEnd(change)
+                );
+                changing = false;
+            }, 200);
             save();
         });
     };

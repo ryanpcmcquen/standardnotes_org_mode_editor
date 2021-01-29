@@ -4,6 +4,7 @@ curl https://cdn.jsdelivr.net/npm/codemirror@5/addon/fold/foldgutter.min.js -o a
 curl https://cdn.jsdelivr.net/npm/codemirror@5/addon/mode/simple.min.js -o assets/simple.min.js
 curl https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/search.min.js -o assets/search.min.js
 curl https://cdn.jsdelivr.net/npm/codemirror@5/addon/search/searchcursor.min.js -o assets/searchcursor.min.js
+curl https://cdn.jsdelivr.net/npm/codemirror@5/addon/wrap/hardwrap.min.js -o assets/hardwrap.min.js
 curl https://cdn.jsdelivr.net/npm/codemirror@5/keymap/emacs.min.js -o assets/emacs.min.js
 curl https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.css -o assets/codemirror.min.css
 curl https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.min.js -o assets/codemirror.min.js
