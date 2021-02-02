@@ -3,7 +3,7 @@
     "name": "Org mode",
     "content_type": "SN|Component",
     "area": "editor-editor",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "description": "Org mode support for Standard Notes.",
     "url": "https://ryanpcmcquen.org/standardnotes_org_mode_editor/",
     "download_url": "https://github.com/ryanpcmcquen/standardnotes_org_mode_editor/archive/gh-pages.zip",
