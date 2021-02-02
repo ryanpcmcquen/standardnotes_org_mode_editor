@@ -27,12 +27,22 @@ html {
     right: 0;
     bottom: 30px;
     left: 0;
+
+    line-height: 1.3;
 }
 
 /* Fix the alignment/size of the folding arrows. */
 .CodeMirror-gutter-elt {
-    font-size: 150%;
-    margin-top: -10px;
+    font-size: 160%;
+    margin-top: -9px;
+}
+
+.CodeMirror-gutter-elt,
+.CodeMirror-foldgutter-folded,
+.CodeMirror-foldgutter-open,
+.CodeMirror-foldgutter-folded::after,
+.CodeMirror-foldgutter-open::after {
+    width: 20px;
 }
 
 .CodeMirror-sizer {
@@ -41,6 +51,18 @@ html {
 
 .CodeMirror-gutters {
     padding-right: 9px;
+}
+
+.CodeMirror-foldgutter-folded,
+.CodeMirror-foldgutter-open {
+    padding: 2px;
+}
+
+.CodeMirror-foldgutter-folded::after {
+    content: "+";
+}
+.CodeMirror-foldgutter-open::after {
+    content: "-";
 }
 
 /*
