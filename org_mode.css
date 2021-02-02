@@ -34,7 +34,7 @@ html {
 /* Fix the alignment/size of the folding arrows. */
 .CodeMirror-gutter-elt {
     font-size: 175%;
-    margin-top: -5px;
+    margin-top: -9px;
 }
 
 .CodeMirror-sizer {
@@ -43,6 +43,11 @@ html {
 
 .CodeMirror-gutters {
     padding-right: 9px;
+}
+
+.CodeMirror-foldgutter-folded,
+.CodeMirror-foldgutter-open {
+    padding: 2px;
 }
 
 .CodeMirror-foldgutter-folded::after {
