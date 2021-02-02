@@ -1,5 +1,6 @@
 {
-    "version": "1.4.3",
+    "name": "standardnotes_org_mode_editor",
+    "version": "1.4.4",
     "sn": {
         "main": "index.html"
     }
