@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (initialLoad) {
                 initialLoad = false;
                 editor.getDoc().clearHistory();
+
+                // Initialize with everything folded, like how Emacs does it:
+                editor.execCommand('unfoldAll');
+                editor.execCommand('foldAll');
             }
         }
     };
@@ -89,10 +93,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             mode: "orgmode",
         });
         editor.setSize("100%", "100%");
-
-        // Initialize with everything folded, like how Emacs does it:
-        editor.execCommand('unfoldAll');
-        editor.execCommand('foldAll');
 
         let wait;
         let changing = false;
