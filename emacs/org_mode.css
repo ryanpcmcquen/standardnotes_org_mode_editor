@@ -1,7 +1,6 @@
 body,
 html {
     font-family: sans-serif;
-    font-size: 16px;
     height: 100%;
     margin: 0;
 }
@@ -16,7 +15,7 @@ html {
 .CodeMirror {
     flex: 1 1 auto;
     resize: none;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 0;
     font-family: monospace;
     padding: 0;
@@ -28,6 +27,12 @@ html {
     right: 0;
     bottom: 30px;
     left: 0;
+}
+
+/* Fix the alignment/size of the folding arrows. */
+.CodeMirror-gutter-elt {
+    font-size: 150%;
+    margin-top: -10px;
 }
 
 /*
