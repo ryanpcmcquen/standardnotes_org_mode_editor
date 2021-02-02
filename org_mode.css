@@ -35,6 +35,14 @@ html {
     margin-top: -10px;
 }
 
+.CodeMirror-sizer {
+    margin-left: 22px;
+}
+
+.CodeMirror-gutters {
+    padding-right: 9px;
+}
+
 /*
 .__data_from_root__ {
     display: none;
