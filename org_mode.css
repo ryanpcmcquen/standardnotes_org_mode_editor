@@ -39,7 +39,9 @@ html {
 
 .CodeMirror-gutter-elt,
 .CodeMirror-foldgutter-folded,
-.CodeMirror-foldgutter-open {
+.CodeMirror-foldgutter-open,
+.CodeMirror-foldgutter-folded::after,
+.CodeMirror-foldgutter-open::after {
     width: 20px;
 }
 
