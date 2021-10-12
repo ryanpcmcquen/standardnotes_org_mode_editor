@@ -15,7 +15,7 @@ https://ryanpcmcquen.org/standardnotes_org_mode_editor/org_mode.json
 Backup link:
 
 ```
-https://gitcdn.xyz/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/org_mode.json
+https://gitcdn.link/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/org_mode.json
 ```
 
 ## Emacs Version Install link (2.1+):
@@ -27,7 +27,7 @@ https://ryanpcmcquen.org/standardnotes_org_mode_editor/emacs/org_mode.json
 Backup link:
 
 ```
-https://gitcdn.xyz/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/emacs/org_mode.json
+https://gitcdn.link/repo/ryanpcmcquen/standardnotes_org_mode_editor/gh-pages/emacs/org_mode.json
 ```
 
 ---
